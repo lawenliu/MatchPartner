@@ -1,0 +1,106 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.care.matchpartner"
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 2016072901
+        versionName "1.0"
+        multiDexEnabled true
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "umeng"]
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('keystore.jks')
+            storePassword 'keystore'
+            keyAlias 'defaultkey'
+            keyPassword 'keystore'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+
+        release {
+            // no log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+
+            // code confuse
+            minifyEnabled true
+
+            // alignment
+            zipAlignEnabled true
+
+            // Remove no use resource
+            shrinkResources true
+
+            // proguard define file
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            // code sign configure
+            signingConfig signingConfigs.release
+        }
+    }
+
+    productFlavors {
+        /*GooglePlay{}
+        QQ{}
+        Taobao{}
+        WanDouJia{}
+        AnZhuo{}
+        AnZhi{}
+        Store360{}*/
+        BaiDu {}
+        /*Store163{}
+        GFeng{}
+        AppChina{}
+        EoeMarket{}
+        Store91{}
+        NDuo{}
+        xiaomi{}
+        umeng{}*/
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith(".apk")) {
+                def fileName = outputFile.name.replace(".apk", "-${defaultConfig.versionName}.apk")
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+}
+
+
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile files('libs/FlurryAnalytics-5.6.0.jar')
+    compile 'com.google.android.gms:play-services:7.5.0'
+    /**
+     * ??WandoujiaSDK.aar
+     */
+    compile(name: 'WandoujiaSDK', ext: 'aar')
+    /**
+     * ???sdk????
+     */
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.squareup.okhttp:okhttp:2.2.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+    compile 'com.squareup:otto:1.3.6'
+    compile 'com.squareup.picasso:picasso:2.4.0'
+}
