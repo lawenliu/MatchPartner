@@ -94,7 +94,6 @@ public class GameAdapter  extends BaseAdapter {
         if (itemView == null || itemView.getCurrentIndex() != position) {
             itemView = new GameItemView(mContext);
             itemView.setArguments(position, mThumbIds[position]);
-            itemView.onDra
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
