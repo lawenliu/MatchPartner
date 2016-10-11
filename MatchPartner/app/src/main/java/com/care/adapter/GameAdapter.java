@@ -12,7 +12,7 @@ import com.care.matchpartner.R;
 import java.util.Dictionary;
 import java.util.HashMap;
 
-public class GameAdapter  extends BaseAdapter {
+public class GameAdapter extends BaseAdapter {
 
     private static HashMap<Integer, Integer> bkColors = new HashMap<>();
     private static HashMap<Integer, Integer> partners = new HashMap<>();

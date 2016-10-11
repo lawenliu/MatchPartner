@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeGame() {
-
-
         mGameAdapter = new GameAdapter(this);
         mGameGridView.setAdapter(mGameAdapter);
     }
