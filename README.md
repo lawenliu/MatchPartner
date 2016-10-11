@@ -1,4 +1,4 @@
-# AnimalRecognition
+# MatchPartner
 
 This is a demo for android developing. You can use the code to finish your works.
 
@@ -9,3 +9,5 @@ Basic structure of Android code with Android studio
 Application, Activity and Fragment are used in this project
 Audio player for button click is used in this project
 Different package name with for channels configuration is in gradle
+
+Android program for a game. Adding the path to the partners, then the partners will connect with each other.
